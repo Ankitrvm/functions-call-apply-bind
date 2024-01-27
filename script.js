@@ -225,3 +225,84 @@ document
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
 poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+
+/// IIFE - immediately invocked function experession.
+
+const runOnce = function () {
+  console.log('this will never run again');
+};
+runOnce();
+// but we can call this function again and again leter in the code.
+
+// iife - this is two example of immediadely invocked function experession
+//1.
+(function () {
+  console.log('This only run once.');
+})();
+//2.
+(() => console.log('Run time only one'))();
+
+// Closure
+
+const secureBooking = function () {
+  let seat = 0;
+
+  return function () {
+    seat++;
+    console.log(`this is seat : ${seat}`);
+  };
+};
+
+const booker = secureBooking();
+booker();
+booker();
+booker();
+
+//example 2
+const boardingPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(
+      `Total passengers is: ${n} and each group has ${perGroup} member`
+    );
+  }, wait * 1000);
+  console.log(`boarding starts in ${wait} seconds`);
+};
+
+boardingPassengers(180, 3);
+
+// exmple 3
+
+let f;
+
+const g = function () {
+  let a = 20;
+  f = function () {
+    console.log(a * 3);
+  };
+};
+
+const h = function () {
+  let b = 10;
+  f = function () {
+    console.log(b * 3);
+  };
+};
+
+g();
+f();
+//reassining f
+h();
+f();
+
+// Coading challenge 2
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+
+  header.addEventListener('click', function () {
+    header.style.color = 'blue';
+  });
+})();
